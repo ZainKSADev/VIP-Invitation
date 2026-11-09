@@ -301,83 +301,6 @@
       transform: translateY(-2px);
     }
 
-    /* Modal Overlay (RSVP) */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(3, 23, 22, 0.88);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .modal-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .modal-card {
-      background: #092c29;
-      border: 1px solid var(--zain-green);
-      border-radius: 20px;
-      width: 100%;
-      max-width: 480px;
-      padding: 32px;
-      position: relative;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-    }
-
-    .close-modal {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-size: 26px;
-      cursor: pointer;
-      line-height: 1;
-    }
-
-    html[dir="rtl"] .close-modal {
-      right: auto;
-      left: 20px;
-    }
-
-    .form-group {
-      margin-bottom: 18px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-bottom: 6px;
-    }
-
-    .form-control {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 8px;
-      background: rgba(3, 23, 22, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #fff;
-      font-family: inherit;
-      font-size: 14px;
-    }
-
-    .form-control:focus {
-      outline: none;
-      border-color: var(--zain-green);
-    }
-
     @media (max-width: 768px) {
       .details-grid {
         grid-template-columns: 1fr;
@@ -476,9 +399,6 @@
     </section>
 
     <footer class="actions-footer">
-      <button class="btn btn-primary" onclick="openRSVP()" data-i18n="btn_rsvp">
-        ✍️ Confirm Attendance (RSVP)
-      </button>
 
       <a href="https://maps.app.goo.gl/oEzi4uUeD8xUHB91A" target="_blank" class="btn btn-secondary" data-i18n="btn_map">
         📍 Open Google Maps
@@ -489,54 +409,6 @@
       </button>
     </footer>
   </main>
-
-  <!-- Corrected RSVP Modal Structure -->
-  <div class="modal-overlay" id="rsvpModal">
-    <div class="modal-card">
-      <button class="close-modal" onclick="closeRSVP()">&times;</button>
-      
-      <div id="rsvpFormContainer">
-        <h3 style="margin-bottom: 8px; color: #fff;" data-i18n="rsvp_modal_title">Confirm Executive Attendance</h3>
-        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 20px;" data-i18n="rsvp_modal_sub">
-          Kindly RSVP to finalize VIP protocol and security registration.
-        </p>
-
-        <form id="rsvpForm" onsubmit="submitRSVP(event)">
-          <!-- Optional: Paste your free key from https://web3forms.com below -->
-          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
-          <input type="hidden" name="subject" value="VIP Confirmation: Zain & Arrab Franchise Launch" />
-          <input type="hidden" name="from_name" value="Zain & Arrab Launch Committee" />
-
-          <div class="form-group">
-            <label data-i18n="name_label">Full Name & Title</label>
-            <input type="text" name="name" class="form-control" required placeholder="e.g., Eng. Sultan Al-Deghaither" />
-          </div>
-          <div class="form-group">
-            <label data-i18n="org_label">Organization</label>
-            <select name="organization" class="form-control" required>
-              <option value="Zain KSA">Zain KSA</option>
-              <option value="Arrab Management">Arrab Management</option>
-              <option value="VIP Delegate">VIP Delegate</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label data-i18n="email_label">Official Email</label>
-            <input type="email" name="email" class="form-control" required placeholder="name@organization.com" />
-          </div>
-
-          <button type="submit" id="submitBtn" class="btn btn-primary" style="width: 100%; margin-top: 10px;" data-i18n="submit_btn">
-            Submit RSVP
-          </button>
-        </form>
-      </div>
-
-      <div id="rsvpSuccess" style="display:none; text-align:center; padding: 20px 0;">
-        <span style="font-size: 44px; display:block; margin-bottom:10px;">✅</span>
-        <h4 style="margin: 12px 0 6px; font-size:20px; color:#fff;" data-i18n="success_msg">Thank you, attendance confirmed.</h4>
-        <p style="font-size: 14px; color: var(--text-muted);" data-i18n="success_sub">We look forward to honoring your presence.</p>
-      </div>
-    </div>
-  </div>
 
   <script>
     const i18n = {
@@ -556,16 +428,8 @@
         hours: "Hours",
         minutes: "Mins",
         seconds: "Secs",
-        btn_rsvp: "✍️ Confirm Attendance (RSVP)",
         btn_map: "📍 Open Google Maps",
         btn_calendar: "🗓️ Add to Calendar",
-        rsvp_modal_title: "Confirm Executive Attendance",
-        rsvp_modal_sub: "Kindly RSVP to finalize VIP protocol and security registration.",
-        name_label: "Full Name & Title",
-        org_label: "Organization",
-        email_label: "Official Email",
-        submit_btn: "Submit RSVP",
-        success_msg: "Thank you, attendance confirmed.",
         success_sub: "We look forward to honoring your presence."
       },
       ar: {
@@ -584,16 +448,8 @@
         hours: "ساعات",
         minutes: "دقائق",
         seconds: "ثواني",
-        btn_rsvp: "✍️ تأكيد الحضور (RSVP)",
         btn_map: "📍 خرائط جوجل",
         btn_calendar: "🗓️ إضافة للتقويم",
-        rsvp_modal_title: "تأكيد حضور القيادات التنفيذية",
-        rsvp_modal_sub: "يرجى تأكيد الحضور لترتيب مراسم الاستقبال والبروتوكول الرسمي.",
-        name_label: "الاسم الكريم والمنصب",
-        org_label: "الجهة",
-        email_label: "البريد الإلكتروني الرسمي",
-        submit_btn: "تأكيد الحضور",
-        success_msg: "تم تسجيل تأكيد حضوركم بنجاح.",
         success_sub: "نتطلع بكل فخر واعتزاز لاستقبالكم."
       }
     };
@@ -640,74 +496,6 @@
     }
     setInterval(updateCountdown, 1000);
     updateCountdown();
-
-    // Modal Controls
-    function openRSVP() {
-      document.getElementById('rsvpModal').classList.add('active');
-    }
-
-    function closeRSVP() {
-      document.getElementById('rsvpModal').classList.remove('active');
-    }
-
-    // Close when clicking outside modal card
-    document.getElementById('rsvpModal').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeRSVP();
-      }
-    });
-
-    // Submit RSVP with automatic fallback
-    async function submitRSVP(e) {
-      e.preventDefault();
-      const form = document.getElementById('rsvpForm');
-      const submitBtn = document.getElementById('submitBtn');
-      const originalText = submitBtn.innerText;
-      const accessKey = form.querySelector('input[name="access_key"]').value;
-
-      submitBtn.innerText = currentLang === 'ar' ? "جاري التأكيد..." : "Confirming...";
-      submitBtn.disabled = true;
-
-      const triggerSuccess = () => {
-        document.getElementById('rsvpFormContainer').style.display = 'none';
-        document.getElementById('rsvpSuccess').style.display = 'block';
-        addToCalendar();
-
-        setTimeout(() => {
-          closeRSVP();
-          setTimeout(() => {
-            form.reset();
-            document.getElementById('rsvpFormContainer').style.display = 'block';
-            document.getElementById('rsvpSuccess').style.display = 'none';
-            submitBtn.disabled = false;
-            submitBtn.innerText = originalText;
-          }, 400);
-        }, 3500);
-      };
-
-      // If user hasn't added a key yet, perform clean local confirmation
-      if (!accessKey || accessKey === "YOUR_ACCESS_KEY_HERE") {
-        setTimeout(triggerSuccess, 600);
-        return;
-      }
-
-      // If key is set, post to web3forms
-      try {
-        const response = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          body: new FormData(form)
-        });
-        const result = await response.json();
-        if (result.success) {
-          triggerSuccess();
-        } else {
-          // If api fails, still confirm attendance for the executive
-          triggerSuccess();
-        }
-      } catch (err) {
-        triggerSuccess();
-      }
-    }
 
     // Add to Calendar (.ics)
     function addToCalendar() {
